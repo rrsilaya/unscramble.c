@@ -1,35 +1,41 @@
 typedef struct word {
-  int value;
+  char *string;
 
   struct word *left;
   struct word *right;
 } WORD;
 
-WORD* createWord(int value) {
-  WORD* new = (WORD*) malloc(sizeof(WORD));
+WORD* createWord(char *string) {
+  WORD* node = (WORD*) malloc(sizeof(WORD));
 
-  new -> value = value;
-  new -> left = NULL;
-  new -> right = NULL;
+  node -> left = NULL;
+  node -> right = NULL;
 
-  return new;
+  node -> string = (char *) malloc(sizeof(char) * strlen(string));
+  strcpy(node -> string, string);
+
+  return node;
 }
 
-void insertNode(WORD** root, int value) {
+int cmpStr(char *a, char *b) {
+  return strcmp(a, b) > 0;
+}
+
+void insertNode(WORD** root, char* string) {
   WORD *base = *root;
 
   if (base == NULL) {
-    *root = createWord(value);
+    *root = createWord(string);
   } else {
-    if (base -> right != NULL && base -> value < value) {
-      insertNode(&(base -> right), value);
-    } else if (base -> left != NULL && base -> value > value) {
-      insertNode(&(base -> left), value);
+    if (base -> right != NULL && !cmpStr(base -> string, string)) {
+      insertNode(&(base -> right), string);
+    } else if (base -> left != NULL && cmpStr(base -> string, string)) {
+      insertNode(&(base -> left), string);
     } else {
       // Probably the leaf nodes are NULL
-      WORD *node = createWord(value);
+      WORD *node = createWord(string);
 
-      if (base -> value < value) base -> right = node;
+      if (!cmpStr(base -> string, string)) base -> right = node;
       else base -> left = node;
     }
   }
@@ -40,7 +46,7 @@ void viewTree(WORD* root, int tabs) {
     viewTree(root -> right, tabs + 1);
 
     for (int i = 0; i < tabs; i++) printf("\t");
-    printf("%2i\n", root -> value);
+    printf("%10s\n", root -> string);
 
     viewTree(root -> left, tabs + 1);
   }
