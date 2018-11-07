@@ -51,3 +51,5 @@ void viewTree(WORD* root, int tabs) {
     viewTree(root -> left, tabs + 1);
   }
 }
+
+// @TODO: Create a RECURSIVE function that will delete the entire tree.
