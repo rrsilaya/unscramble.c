@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
     insertNode(&root, "reader");
 
     viewTree(root, 0);
+    deleteTree(&root);
     return 0;
   }
 }

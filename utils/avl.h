@@ -44,12 +44,20 @@ void insertNode(WORD** root, char* string) {
 void viewTree(WORD* root, int tabs) {
   if (root != NULL) {
     viewTree(root -> right, tabs + 1);
-
     for (int i = 0; i < tabs; i++) printf("\t");
     printf("%10s\n", root -> string);
-
     viewTree(root -> left, tabs + 1);
   }
 }
 
-// @TODO: Create a RECURSIVE function that will delete the entire tree.
+
+void deleteTree(WORD ** root){
+
+  if((*root) != NULL){
+    deleteTree(&((*root)->left));
+    deleteTree(&((*root)->right));
+    printf("Deleting %s\n",(*root)->string); //Displaying what is about to be deleted
+    free(*root);
+    *root = NULL;
+  }
+}
