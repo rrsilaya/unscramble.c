@@ -16,12 +16,10 @@ int main(int argc, char *argv[]) {
     // permutation(argv[1]);
     WORD *root = NULL;
 
-    insertNode(&root, "earned");
-    insertNode(&root, "beast");
-    insertNode(&root, "arrival");
-    insertNode(&root, "fun");
-    insertNode(&root, "card");
-    insertNode(&root, "reader");
+    insertValue(&root, "z");
+    insertValue(&root, "y");
+    insertValue(&root, "a");
+    insertValue(&root, "b");
 
     viewTree(root, 0);
     deleteTree(&root);
