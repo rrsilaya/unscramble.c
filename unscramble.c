@@ -7,6 +7,7 @@
 #include "utils/misc.h"
 #include "utils/avl.h"
 #include "utils/permutation.h"
+#include "utils/checker.h"
 
 int main(int argc, char *argv[]) {
   if (argc < 3) {
@@ -18,6 +19,8 @@ int main(int argc, char *argv[]) {
 
     permutation(argv[1], argv[2], &solutions);
     viewTree(solutions, 0);
+   // readFile(solutions);
+    searchDict(solutions);
     return 0;
   }
 }
