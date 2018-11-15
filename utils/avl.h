@@ -170,9 +170,9 @@ void insertNode(WORD** root, WORD* temp) {
   else {
     temp -> parent = base;
 
-    if (!cmpStr(base -> string, temp -> string)) {
+    if (strcmp(base -> string, temp -> string) < 0) {
       insertNode(&(base -> right), temp);
-    } else {
+    } else if (strcmp(base -> string, temp -> string) > 0) {
       insertNode(&(base -> left), temp);
     }
   }

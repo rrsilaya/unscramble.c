@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "utils/misc.h"
 #include "utils/avl.h"
 #include "utils/permutation.h"
 
@@ -13,16 +14,10 @@ int main(int argc, char *argv[]) {
 
     return 1;
   } else {
-    // permutation(argv[1]);
-    WORD *root = NULL;
+    WORD *solutions = NULL;
 
-    insertValue(&root, "z");
-    insertValue(&root, "y");
-    insertValue(&root, "a");
-    insertValue(&root, "b");
-
-    viewTree(root, 0);
-    deleteTree(&root);
+    permutation(argv[1], argv[2], &solutions);
+    viewTree(solutions, 0);
     return 0;
   }
 }
