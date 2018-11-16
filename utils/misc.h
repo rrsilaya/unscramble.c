@@ -12,7 +12,7 @@ int getWildcards(char *mask) {
 }
 
 char* getChoices(char *mask, char *letters, int wildcards) {
-  char *string = (char *) malloc(sizeof(char) * (wildcards + 1));
+  char *string = (char *) malloc(sizeof(char) * (strlen(letters) + 1));
   int len = 0;
   
   // @TODO: If you can think of other ways to check this, change this
@@ -44,9 +44,10 @@ char* getChoices(char *mask, char *letters, int wildcards) {
     }
 
     // @TODO: If difference < 0, this is an error.
+
   }
 
-  string[wildcards] = '\0';
+  string[len] = '\0';
   return string;
 }
 
@@ -65,4 +66,16 @@ char* replaceWildcards(char *mask, char *letters) {
 
   string[len] = '\0';
   return string;
+}
+
+char* toLowerCase(char *string) {
+  int len = strlen(string);
+  char *lower = (char *) malloc(sizeof(char) * (len + 1));
+
+  for (int i = 0; i < len; i++) {
+    lower[i] = tolower(string[i]);
+  }
+
+  lower[len] = '\0';
+  return lower;
 }

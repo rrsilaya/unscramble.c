@@ -28,7 +28,7 @@ void permutation(char *letters, char *mask, WORD **root) {
       }
 
       // Find Candidates
-      for (candidate = wildcards - 1; candidate >= 0; candidate--) {
+      for (candidate = strlen(choices) - 1; candidate >= 0; candidate--) {
         for (i = move - 1; i > 0; i--) {
           if (option[i][nopts[i]] == candidate) break;
         }

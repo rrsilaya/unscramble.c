@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "utils/misc.h"
 #include "utils/avl.h"
@@ -16,11 +17,11 @@ int main(int argc, char *argv[]) {
     return 1;
   } else {
     WORD *solutions = NULL;
+    WORD *dictionary = NULL;
 
-    permutation(argv[1], argv[2], &solutions);
-    viewTree(solutions, 0);
-   // readFile(solutions);
-    searchDict(solutions);
+    permutation(toLowerCase(argv[1]), toLowerCase(argv[2]), &solutions);
+    loadFile(&dictionary);
+    searchDict(solutions, dictionary);
     return 0;
   }
 }

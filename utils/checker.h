@@ -1,33 +1,41 @@
-void searchFile(char* string){
+void loadFile(WORD **root){
   FILE *stream;
-  char *line = NULL;
-  size_t len = 0;
-  ssize_t read;
   stream = fopen("./dictionary/words.txt", "r");
+
+  char* line = (char *) malloc(sizeof(char) * MAX_WORD_SIZE);
+  
   if (stream == NULL){
     printf("words.txt not in the directory");
-      exit(EXIT_FAILURE);
-  }
-  else{
-    while ((read = getline(&line, &len, stream)) != -1) {
-      if(strcmp(line, string) == 0){
-        printf("%s found inside dictionary %s\n", string, line);
-        break;
-      }else if(strcmp(line, string) > 0){
-        printf("%s-> NOT FOUND\n", string);
-        break;
+    exit(EXIT_FAILURE);
+  }else{
+      while (fgets(line, MAX_WORD_SIZE, stream) != NULL){
+        char *solution = (char *) malloc(sizeof(char) * MAX_WORD_SIZE);
+        strcpy(solution, line);
+        solution[strlen(solution) - 1] = '\0';
+        insertValue(root, solution);
       }
-    }
-    free(line);
-    fclose(stream);
+      fclose(stream);
   }
 }
 
-void searchDict(WORD* root) {
+void searchTree(WORD* root, char* string) {
   if (root != NULL) {
-    searchDict(root -> left);
-    searchFile(strcat(root->string, "\n"));
-    searchDict(root -> right);
+    if(strcmp(root->string, string) < 0){
+      searchTree(root -> right, string);
+    }else if(strcmp(root->string, string) > 0){
+      searchTree(root -> left, string);
+    }else if(strcmp(root->string, string) == 0){
+      printf("%s\n", string);
+    }
   }
 }
+
+void searchDict(WORD* root, WORD* sol) {
+  if (root != NULL) {
+    searchDict(root -> left, sol);
+    searchTree(sol, root -> string);
+    searchDict(root -> right, sol);
+  }
+}
+
 
