@@ -4,9 +4,9 @@ void permutation(char *letters, char *mask, WORD **root) {
   int wildcards = getWildcards(mask);
   char *choices = getChoices(mask, letters, wildcards);
 
-  char *nopts = (char *) malloc(sizeof(char) * (wildcards + 2));
-  char **option = (char **) malloc(sizeof(char*) * (wildcards + 2));
-  for (int i = 0; i < wildcards + 2; i++) option[i] = (char *) malloc(sizeof(char) * (wildcards + 2));
+  char *nopts = (char *) malloc(sizeof(char) * (len + 2));
+  char **option = (char **) malloc(sizeof(char*) * (len + 2));
+  for (int i = 0; i < len + 2; i++) option[i] = (char *) malloc(sizeof(char) * (len + 2));
 
   int start, move, i, candidate;
 

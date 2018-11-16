@@ -20,6 +20,7 @@ int main(int argc, char *argv[]) {
     WORD *dictionary = NULL;
 
     permutation(toLowerCase(argv[1]), toLowerCase(argv[2]), &solutions);
+    // viewTree(solutions, 0);
     loadFile(&dictionary);
     searchDict(solutions, dictionary);
     return 0;

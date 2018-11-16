@@ -1,18 +1,18 @@
 void loadFile(WORD **root){
   FILE *stream;
-  stream = fopen("./dictionary/words.txt", "r");
+  stream = fopen("./dictionary/american-english", "r");
 
   char* line = (char *) malloc(sizeof(char) * MAX_WORD_SIZE);
   
   if (stream == NULL){
-    printf("words.txt not in the directory");
+    printf("Dictionary not found");
     exit(EXIT_FAILURE);
   }else{
       while (fgets(line, MAX_WORD_SIZE, stream) != NULL){
         char *solution = (char *) malloc(sizeof(char) * MAX_WORD_SIZE);
         strcpy(solution, line);
         solution[strlen(solution) - 1] = '\0';
-        insertValue(root, solution);
+        insertValue(root, toLowerCase(solution));
       }
       fclose(stream);
   }
