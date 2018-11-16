@@ -23,7 +23,6 @@ void permutation(char *letters, char *mask, WORD **root) {
 
         for (i = 1; i < move; i++) solution[i - 1] = choices[option[i][nopts[i]]];
         solution[move - 1] = '\0';
-
         insertValue(root, replaceWildcards(mask, solution));
       }
 

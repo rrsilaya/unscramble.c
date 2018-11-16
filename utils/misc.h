@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #define ALPHABET 26
 #define ASCII_OFFSET 97
 
@@ -36,15 +37,16 @@ char* getChoices(char *mask, char *letters, int wildcards) {
   for (int i = 0; i < ALPHABET; i++) {
     int difference = letters_counter[i] - mask_counter[i];
 
-    if (difference != 0) {
+    if (difference > 0) {
       for (int mult = 0; mult < difference; mult++) {
         string[len] = i + ASCII_OFFSET;
         len++;
       }
-    }
-
-    // @TODO: If difference < 0, this is an error.
-
+    }else if (difference < 0){
+      free(string);
+      string = NULL;
+      exit(1);
+    } 
   }
 
   string[len] = '\0';
