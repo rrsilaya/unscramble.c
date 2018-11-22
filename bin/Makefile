@@ -8,7 +8,7 @@ build:
 	gcc unscramble.c -o unscramble.exe
 	mkdir -p ../server/bin
 	mv unscramble.exe ../server/bin/
-	cp -r dictionary/ ../server/bin/
+	cp -r dictionary/ ../server
 
 run:
 	./unscramble.exe encfsuo c_____e
