@@ -32,14 +32,14 @@ app.use('/api/:letters', async (req, res) => {
         });
       } catch(err) {
         return throwError(res, {
-          code: 403,
+          code: 400,
           payload: { message: 'Invalid mask input', letters, mask }
         });
       }
     }
   } else {
     return throwError(res, {
-      code: 403,
+      code: 400,
       payload: { message: 'Invalid letter input', letters, mask }
     });
   }
