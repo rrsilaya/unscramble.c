@@ -19,10 +19,14 @@ int main(int argc, char *argv[]) {
     WORD *solutions = NULL;
     WORD *dictionary = NULL;
 
-    permutation(toLowerCase(argv[1]), toLowerCase(argv[2]), &solutions);
-    // viewTree(solutions, 0);
-    loadFile(&dictionary);
-    searchDict(solutions, dictionary);
+    if (strlen(argv[2]) !=  strlen(argv[1])) {
+      printf("Error: %s elements cannot be an ordered subset of %s elements\n", argv[2], argv[1]);
+    } else {
+      permutation(toLowerCase(argv[1]), toLowerCase(argv[2]), &solutions);
+      loadFile(&dictionary);
+      searchDict(solutions, dictionary);       
+      deleteTree(&dictionary); 
+    }
     return 0;
   }
 }

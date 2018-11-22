@@ -5,7 +5,7 @@ compile:
 	gcc unscramble.c -o unscramble.exe
 
 run:
-	./unscramble.exe encfsuo c_____e
+	./unscramble.exe encfsuo _______
 
 clean:
 	rm *.exe

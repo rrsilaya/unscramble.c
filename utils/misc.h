@@ -41,10 +41,9 @@ char* getChoices(char *mask, char *letters, int wildcards) {
         string[len] = i + ASCII_OFFSET;
         len++;
       }
+    } else {
+      printf("Error");
     }
-
-    // @TODO: If difference < 0, this is an error.
-
   }
 
   string[len] = '\0';
