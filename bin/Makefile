@@ -5,9 +5,10 @@ compile:
 	gcc unscramble.c -o unscramble.exe
 
 build:
-	gcc unscrable.c -o unscramble.exe
-	mkdir ../server/bin
+	gcc unscramble.c -o unscramble.exe
+	mkdir -p ../server/bin
 	mv unscramble.exe ../server/bin/
+	cp -r dictionary/ ../server/bin/
 
 run:
 	./unscramble.exe encfsuo c_____e
