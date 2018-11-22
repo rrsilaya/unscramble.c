@@ -1,6 +1,6 @@
 void loadFile(WORD **root){
   FILE *stream;
-  stream = fopen("./dictionary/american-english", "r");
+  stream = fopen("./dictionary/words.txt", "r");
 
   char* line = (char *) malloc(sizeof(char) * MAX_WORD_SIZE);
   
