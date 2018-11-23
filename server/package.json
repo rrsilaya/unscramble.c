@@ -1,0 +1,14 @@
+{
+  "name": "unscramble.c",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/"
+  },
+  "dependencies": {
+    "backpack-core": "^0.8.2",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}
