@@ -12,7 +12,8 @@ class App extends Component {
     this.state = {
       characters: [],
       masks: '',
-      words: []
+      words: [],
+      isClick: true
     }
 
     this.keyPressFunction = this.keyPressFunction.bind(this);
@@ -28,7 +29,7 @@ class App extends Component {
     }else if (event.key == 'Enter') {
       let res = await axios.get(`${this.state.characters}?mask=${this.state.masks}`);
       this.setState({words: res.data.words});
-    }else if (event.key == 'Backspace') {
+    }else if (event.key == 'Backspace'  && this.state.isClick === true) {
       this.setState(prevState => ({
         characters: prevState.characters.slice(0,-1)
       }));
@@ -37,6 +38,10 @@ class App extends Component {
 
   getMask(masks){
     this.setState({masks:masks});
+  }
+
+  changeFocus = () => {
+    this.setState({isClick: !this.state.isClick});
   }
 
   componentDidMount() {
@@ -70,7 +75,7 @@ class App extends Component {
             <Card char={char} key={key}/>
           )}
           </div>
-          <Mask getMask={this.getMask}/>
+          <Mask getMask={this.getMask} changeFocus={this.changeFocus}/>
           <div style={{...this.style.mask}} className="container-fluid">
             {this.state.words.map((char,key) =>
               <Word char={char} key={key}/>

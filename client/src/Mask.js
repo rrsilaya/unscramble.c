@@ -30,8 +30,18 @@ class Mask extends Component {
 
     render() {
         return(
-            <div className="wrapper" onKeyPress={this.keyPressFunction} tabIndex="0">
-                <input ref="mask" className="input" placeholder="Add mask" type="text" value={this.state.input} onChange={this.updateInputValue}/>
+            <div className="wrapper" tabIndex="0">
+                <input 
+                    ref="mask" 
+                    className="input" 
+                    placeholder="Add mask" 
+                    type="text" 
+                    value={this.state.input}
+                    onKeyPress={this.keyPressFunction}
+                    onChange={this.updateInputValue} 
+                    onFocus={this.props.changeFocus}
+                    onBlur={this.props.changeFocus}
+                />
                 <span className="underline"></span>
             </div>
 

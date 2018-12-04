@@ -1,4 +1,4 @@
-#define MAX_WORD_SIZE 20
+#define MAX_WORD_SIZE 60
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,13 +16,13 @@ int main(int argc, char *argv[]) {
 
     return 1;
   } else {
-    WORD *solutions = NULL;
-    WORD *dictionary = NULL;
+    // WORD *solutions = NULL;
+    // WORD *dictionary = NULL;
 
-    permutation(toLowerCase(argv[1]), toLowerCase(argv[2]), &solutions);
+    permutation(toLowerCase(argv[1]), toLowerCase(argv[2]));
     // viewTree(solutions, 0);
-    loadFile(&dictionary);
-    searchDict(solutions, dictionary);
+    // loadFile(&dictionary);
+    // searchDict(solutions, dictionary);
     return 0;
   }
 }
