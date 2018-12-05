@@ -14,7 +14,7 @@ void permutation(char *letters, char *mask) {
   nopts[start] = 1;
 
   FILE *stream;
-  stream = fopen("../dictionary/words.txt", "r");
+  stream = fopen("./dictionary/words.txt", "r");
 
   char* line = (char *) malloc(sizeof(char) * MAX_WORD_SIZE);
   

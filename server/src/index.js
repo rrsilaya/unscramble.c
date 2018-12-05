@@ -31,7 +31,7 @@ app.use('/api/:letters', async (req, res) => {
           mask,
         });
       } catch(err) {
-        return throwError(res, {  
+        return throwError(res, {
           code: 400,
           payload: { message: 'Invalid mask input', letters, mask }
         });
@@ -45,7 +45,7 @@ app.use('/api/:letters', async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 3004;
+const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server listening to port ${port}`);
 });
