@@ -24,13 +24,13 @@ app.use('/api/:letters', async (req, res) => {
         const { stdout } = await exec(`./bin/unscramble.exe ${letters} ${mask}`);
         
         const words = stdout.split('\n');
-        const time = words.pop();
+        const [, time] = words.pop().match(/(\d+)ms/);
 
         return res.status(200).json({
           words: words.slice(0, words.length - 1),
           letters,
           mask,
-          time: +str.match(/(\d+)ms/)[1]
+          time,
         });
       } catch(err) {
         return throwError(res, {
