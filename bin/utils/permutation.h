@@ -23,6 +23,8 @@ void permutation(char *letters, char *mask) {
   move = start = 0;
   nopts[start] = 1;
 
+  int foo = 1;
+
   while (nopts[start] > 0) {
     if (nopts[move] > 0) {
       nopts[++move] = 0;
@@ -59,6 +61,8 @@ void permutation(char *letters, char *mask) {
           option[move][++nopts[move]] = candidate;
         }
       }
+
+      // Prune
       if (strlen(solution) && comparison > 0) {
         // Dict is ahead, meaning no more words with same prefix
         strcpy(substring, word);
