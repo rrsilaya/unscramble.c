@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     WORD *solutions = NULL;
     clock_t startTime = clock(), currentTime;
 
-    permutation(argv[1], argv[2], &solutions);
+    permutation(argv[1], argv[2]);
 
     currentTime = clock() - startTime;
     printf("[TIME] Finished in %ims\n", currentTime * 1000 / CLOCKS_PER_SEC);
