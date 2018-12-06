@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 
 #include "utils/misc.h"
 #include "utils/avl.h"
@@ -16,13 +17,14 @@ int main(int argc, char *argv[]) {
 
     return 1;
   } else {
-    // WORD *solutions = NULL;
-    // WORD *dictionary = NULL;
+    WORD *solutions = NULL;
+    clock_t startTime = clock(), currentTime;
 
-    permutation(toLowerCase(argv[1]), toLowerCase(argv[2]));
-    // viewTree(solutions, 0);
-    // loadFile(&dictionary);
-    // searchDict(solutions, dictionary);
+    permutation(argv[1], argv[2], &solutions);
+
+    currentTime = clock() - startTime;
+    printf("[TIME] Finished in %ims\n", currentTime * 1000 / CLOCKS_PER_SEC);
+
     return 0;
   }
 }
