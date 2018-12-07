@@ -20,6 +20,10 @@ class Mask extends Component {
             masks: [...prevState.masks, char]
         }));
     }
+
+    onTypeMaster = () => {
+        console.log('type')
+    }
      
     updateInputValue = (e) => {
         this.setState({

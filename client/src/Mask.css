@@ -25,7 +25,7 @@ input::-webkit-input-placeholder {
 }
 
 input:focus::-webkit-input-placeholder {
-  color: dodgerblue;
+  color: #05386B;
 }
 
 .input:focus+.underline {

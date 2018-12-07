@@ -1,11 +1,21 @@
 .App {
   text-align: center;
   height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #5CDB95
+  position: absolute;
+  top: 5%;
 }
+
+/* .text{
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  max-width: 100%;
+  background: rgba(0, 0, 0, .3)
+} */
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
