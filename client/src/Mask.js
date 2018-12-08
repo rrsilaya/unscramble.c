@@ -39,7 +39,7 @@ class Mask extends Component {
 
     render() {
         return (
-            <div className="wrapper" tabIndex="0">
+            <div className="wrapper" tabIndex="0" >
                 <input
                     ref="mask"
                     className="input"

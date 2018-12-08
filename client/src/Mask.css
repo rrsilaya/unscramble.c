@@ -17,7 +17,7 @@
   font-family: 'Raleway';
   font-size: "18vw";
   text-align: center;
-  width: 300px;
+  width: 450px;
   height: 60px;
 }
 
@@ -42,5 +42,5 @@ input:focus::-webkit-input-placeholder {
   transform: scale(0, 1);
   -webkit-transition: all 0.5s linear;
   transition: all 0.5s linear;
-  width: 300px;
+  width: 450px;
 }

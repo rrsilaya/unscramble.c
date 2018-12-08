@@ -29,7 +29,8 @@ class App extends Component {
       masks: '',
       words: [],
       isClick: true,
-      showResults: false
+      showResults: false,
+      time: ''
     }
     this.child = React.createRef(this.state.characters.length);
 
@@ -48,10 +49,8 @@ class App extends Component {
       this.setState({ showResults: true });
       let res = await axios.get(`api/${this.state.characters}?mask=${this.state.masks}`);
       await this.showThis();
-
-      this.setState({ words: res.data.words });
-
-
+      this.setState({ words: res.data.words, time: "Time: " + res.data.time + " ms" });
+      console.log(res);
     } else if (event.key == 'Backspace' && this.state.isClick === true) {
       this.setState(prevState => ({
         characters: prevState.characters.slice(0, -1)
@@ -95,6 +94,11 @@ class App extends Component {
       justifyContent: "center",
       alignItems: "center",
       margin: "auto"
+    },
+    time: {
+      justifyContent: "center",
+      alignItems: "center",
+      margin: "auto"
     }
   };
 
@@ -109,6 +113,9 @@ class App extends Component {
               )}
             </div>
             <Mask ref={this.child} getMask={this.getMask} changeFocus={this.changeFocus} />
+            <div style={{ ...this.style.time}}>
+              <h4 style={{ fontWeight: "bold", color: "white" }}>{this.state.time}</h4>
+            </div>
             {this.state.showResults ? <Loader /> : null}
             <div style={{ ...this.style.mask }} className="container-fluid">
               {this.state.words.map((char, key) =>
