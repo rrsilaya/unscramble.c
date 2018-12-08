@@ -18,7 +18,7 @@ void permutation(char *letters, char *mask) {
     exit(EXIT_FAILURE);
   }
 
-  fscanf(dictStream, "%s\n", &word);
+  fscanf(dictStream, "%s\n", word);
 
   move = start = 0;
   nopts[start] = 1;
@@ -40,7 +40,7 @@ void permutation(char *letters, char *mask) {
       if (strlen(solution)) {
         comparison = strcmp(word, solution);
 
-        while (comparison < 0 && fscanf(dictStream, "%s\n", &word) == 1) {
+        while (comparison < 0 && fscanf(dictStream, "%s\n", word) == 1) {
           // Keep on adjusting dict until it catches up
           comparison = strcmp(word, solution);
         }
@@ -48,6 +48,7 @@ void permutation(char *letters, char *mask) {
         if (move - 1 == wildcards && !comparison) {
           // Match found from dict
           printf("%s\n", solution);
+          fscanf(dictStream, "%s\n", word);
         }
       }
 

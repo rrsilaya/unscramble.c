@@ -5,6 +5,7 @@
   box-sizing: border-box;
   display: inline-block;
   margin: 1em 0;
+  max-width: "100%";
 }
 
 .input {
@@ -14,7 +15,7 @@
   color: #555;
   box-sizing: border-box;
   font-family: 'Raleway';
-  font-size: 18px;
+  font-size: "18vw";
   text-align: center;
   width: 300px;
   height: 60px;

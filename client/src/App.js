@@ -29,14 +29,14 @@ class App extends Component {
       masks: '',
       words: [],
       isClick: true,
-      loading: false
+      showResults: false
     }
     this.child = React.createRef(this.state.characters.length);
-    
+
     this.keyPressFunction = this.keyPressFunction.bind(this);
     this.getMask = this.getMask.bind(this);
   }
-  
+
   async keyPressFunction(event) {
     if (event.charCode >= 97 && event.charCode <= 122 && document.activeElement.getAttribute('class') === 'App') {
       let char = String.fromCharCode(event.charCode);
@@ -44,29 +44,36 @@ class App extends Component {
         characters: prevState.characters + char
       }));
       this.onType();
-    }else if (event.key == 'Enter' && this.state.masks.length != 0 && this.state.characters.length != 0) {
-      console.log(this.state.characters + " " + this.state.masks);
-       let res = await axios.get(`${this.state.characters}?mask=${this.state.masks}`);
-       this.setState({words: res.data.words});
-       console.log(res)
-    }else if (event.key == 'Backspace'  && this.state.isClick === true) {
+    } else if (event.key == 'Enter' && this.state.masks.length != 0 && this.state.characters.length != 0) {
+      this.setState({ showResults: true });
+      let res = await axios.get(`${this.state.characters}?mask=${this.state.masks}`);
+      await this.showThis();
+
+      this.setState({ words: res.data.words });
+
+
+    } else if (event.key == 'Backspace' && this.state.isClick === true) {
       this.setState(prevState => ({
-        characters: prevState.characters.slice(0,-1)
+        characters: prevState.characters.slice(0, -1)
       }));
       this.onType();
     }
   }
 
+  showThis = () => {
+    this.setState({ showResults: false });
+  };
+
   onType = () => {
     this.child.current.onTypeMaster(this.state.characters.length);
   };
 
-  getMask(masks){
-    this.setState({masks:masks});
+  getMask(masks) {
+    this.setState({ masks: masks });
   }
 
   changeFocus = () => {
-    this.setState({isClick: !this.state.isClick});
+    this.setState({ isClick: !this.state.isClick });
   }
 
   componentDidMount() {
@@ -84,35 +91,34 @@ class App extends Component {
     color: '#7C0A02',
 
     mask: {
-      width:"90%", 
-      justifyContent: "center", 
-      alignItems: "center", 
+      width: "90%",
+      justifyContent: "center",
+      alignItems: "center",
       margin: "auto"
     }
   };
 
   render() {
     return (
-   
       <div>
         <div className="App" onKeyPress={this.keyPressFunction} onKeyDown={this.keyPressFunction} tabIndex="0" onBlur={this.onBlur} onFocus={this.onFocus}>
           <div className="container-fluid">
             <div>
-              {this.state.characters.split('').map((char,key) =>
-                <Card char={char} key={key}/>
+              {this.state.characters.split('').map((char, key) =>
+                <Card char={char} key={key} />
               )}
             </div>
-            <Mask ref={this.child} getMask={this.getMask} changeFocus={this.changeFocus}/>
-            {/* <Loader hidden={this.state.loading}/> */}
-            <div style={{...this.style.mask}} className="container-fluid">
-              {this.state.words.map((char,key) =>
-                <Word char={char} key={key}/>
+            <Mask ref={this.child} getMask={this.getMask} changeFocus={this.changeFocus} />
+            {this.state.showResults ? <Loader /> : null}
+            <div style={{ ...this.style.mask }} className="container-fluid">
+              {this.state.words.map((char, key) =>
+                <Word char={char} key={key} />
               )}
             </div>
           </div>
         </div>
-        <Particles params={particlesOpt}/>  
-      </div>     
+        <Particles params={particlesOpt} />
+      </div>
     );
   }
 }

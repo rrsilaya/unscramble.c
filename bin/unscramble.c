@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
     permutation(argv[1], argv[2]);
 
     currentTime = clock() - startTime;
-    printf("[TIME] Finished in %ims\n", currentTime * 1000 / CLOCKS_PER_SEC);
+    printf("[TIME] Finished in %ldms\n", currentTime * 1000 / CLOCKS_PER_SEC);
 
     return 0;
   }

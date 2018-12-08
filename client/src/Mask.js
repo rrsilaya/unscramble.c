@@ -13,7 +13,7 @@ class Mask extends Component {
         }
         this.keyPressFunction = this.keyPressFunction.bind(this)
     }
-      
+
     keyPressFunction(event) {
         let char = String.fromCharCode(event.charCode);
         this.setState(prevState => ({
@@ -25,29 +25,29 @@ class Mask extends Component {
         var i;
         let char = '';
         for (i = 0; i < length + 1; i++) {
-            char += '_'; 
+            char += '_';
         }
-        this.setState({input: char}, () => {this.props.getMask(this.state.input)});
+        this.setState({ input: char }, () => { this.props.getMask(this.state.input) });
     }
-     
+
     updateInputValue = (e) => {
         this.setState({
             input: e.target.value
         })
         this.props.getMask(e.target.value)
     }
-    
+
     render() {
-        return(
+        return (
             <div className="wrapper" tabIndex="0">
-                <input 
-                    ref="mask" 
-                    className="input" 
-                    placeholder="Add mask" 
-                    type="text" 
+                <input
+                    ref="mask"
+                    className="input"
+                    placeholder="Add mask"
+                    type="text"
                     value={this.state.input}
                     onKeyPress={this.keyPressFunction}
-                    onChange={this.updateInputValue} 
+                    onChange={this.updateInputValue}
                     onFocus={this.props.changeFocus}
                     onBlur={this.props.changeFocus}
                 />

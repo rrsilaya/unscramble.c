@@ -16,10 +16,10 @@ const throwError = (res, error) => {
 app.use('/api/:letters', async (req, res) => {
   const { letters } = req.params;
 
-  if (/[A-Za-z]+/.test(letters) && letters.length < 40) {
+  if (/[A-Za-z]+/.test(letters) && letters.length < 50) {
     const { mask = Array.from({ length: letters.length }).reduce(acc => acc + '_', '') } = req.query
 
-    if (/[A-Za-z_]+/.test(mask) && mask.length < 40) {
+    if (/[A-Za-z_]+/.test(mask) && mask.length < 50) {
       try {
         const { stdout } = await exec(`./bin/unscramble.exe ${letters} ${mask}`);
         
