@@ -21,8 +21,13 @@ class Mask extends Component {
         }));
     }
 
-    onTypeMaster = () => {
-        console.log('type')
+    onTypeMaster = (length) => {
+        var i;
+        let char = '';
+        for (i = 0; i < length + 1; i++) {
+            char += '_'; 
+        }
+        this.setState({input: char}, () => {this.props.getMask(this.state.input)});
     }
      
     updateInputValue = (e) => {
@@ -31,7 +36,7 @@ class Mask extends Component {
         })
         this.props.getMask(e.target.value)
     }
-
+    
     render() {
         return(
             <div className="wrapper" tabIndex="0">

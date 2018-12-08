@@ -28,7 +28,7 @@ app.use('/api/:letters', async (req, res) => {
         const [, time] = words.pop().match(/(\d+)ms/);
 
         return res.status(200).json({
-          words: words.slice(0, words.length - 1),
+          words: words,
           letters,
           mask,
           time: +time,

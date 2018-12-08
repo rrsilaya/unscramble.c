@@ -4,7 +4,7 @@ import axios from "axios";
 
 import Particles from 'react-particles-js';
 
-
+import Loader from './Loader';
 import Card from './Card'
 import Mask from './Mask'
 import Word from './Word'
@@ -25,11 +25,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      characters: [],
+      characters: '',
       masks: '',
       words: [],
-      isClick: true
+      isClick: true,
+      loading: false
     }
+    this.child = React.createRef(this.state.characters.length);
     
     this.keyPressFunction = this.keyPressFunction.bind(this);
     this.getMask = this.getMask.bind(this);
@@ -39,20 +41,25 @@ class App extends Component {
     if (event.charCode >= 97 && event.charCode <= 122 && document.activeElement.getAttribute('class') === 'App') {
       let char = String.fromCharCode(event.charCode);
       this.setState(prevState => ({
-        characters: [...prevState.characters, char]
+        characters: prevState.characters + char
       }));
-      console.log(this.state.characters.length);
-    }else if (event.key == 'Enter') {
-      let res = await axios.get(`${this.state.characters}?mask=${this.state.masks}`);
-      this.setState({words: res.data.words});
+      this.onType();
+    }else if (event.key == 'Enter' && this.state.masks.length != 0 && this.state.characters.length != 0) {
+      console.log(this.state.characters + " " + this.state.masks);
+       let res = await axios.get(`${this.state.characters}?mask=${this.state.masks}`);
+       this.setState({words: res.data.words});
+       console.log(res)
     }else if (event.key == 'Backspace'  && this.state.isClick === true) {
       this.setState(prevState => ({
         characters: prevState.characters.slice(0,-1)
       }));
+      this.onType();
     }
-
-
   }
+
+  onType = () => {
+    this.child.current.onTypeMaster(this.state.characters.length);
+  };
 
   getMask(masks){
     this.setState({masks:masks});
@@ -91,11 +98,12 @@ class App extends Component {
         <div className="App" onKeyPress={this.keyPressFunction} onKeyDown={this.keyPressFunction} tabIndex="0" onBlur={this.onBlur} onFocus={this.onFocus}>
           <div className="container-fluid">
             <div>
-              {this.state.characters.map((char,key) =>
+              {this.state.characters.split('').map((char,key) =>
                 <Card char={char} key={key}/>
               )}
             </div>
-            <Mask getMask={this.getMask} changeFocus={this.changeFocus}/>
+            <Mask ref={this.child} getMask={this.getMask} changeFocus={this.changeFocus}/>
+            {/* <Loader hidden={this.state.loading}/> */}
             <div style={{...this.style.mask}} className="container-fluid">
               {this.state.words.map((char,key) =>
                 <Word char={char} key={key}/>
