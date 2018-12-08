@@ -11,7 +11,7 @@ build:
 	cp -r dictionary/ ../server
 
 run:
-	./unscramble.exe encfsuo c_____e
+	./unscramble.exe see ___
 
 clean:
 	rm *.exe
