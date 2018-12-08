@@ -28,6 +28,6 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:3001/api/",
+  "proxy": "http://localhost:3001/",
   "homepage": "http://apps.sagip.ph/unscramble.c/"
 }

@@ -49,7 +49,6 @@ app.use('/api/:letters', async (req, res) => {
 });
 
 app.use(express.static(__dirname + '/../public/'));
-app.use('*', (req, res) => res.redirect('/'));
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

@@ -46,7 +46,7 @@ class App extends Component {
       this.onType();
     } else if (event.key == 'Enter' && this.state.masks.length != 0 && this.state.characters.length != 0) {
       this.setState({ showResults: true });
-      let res = await axios.get(`${this.state.characters}?mask=${this.state.masks}`);
+      let res = await axios.get(`/api/${this.state.characters}?mask=${this.state.masks}`);
       await this.showThis();
 
       this.setState({ words: res.data.words });
