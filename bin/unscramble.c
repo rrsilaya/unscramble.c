@@ -4,11 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 
 #include "utils/misc.h"
-#include "utils/avl.h"
 #include "utils/permutation.h"
-#include "utils/checker.h"
 
 int main(int argc, char *argv[]) {
   if (argc < 3) {
@@ -16,13 +15,13 @@ int main(int argc, char *argv[]) {
 
     return 1;
   } else {
-    // WORD *solutions = NULL;
-    // WORD *dictionary = NULL;
+    clock_t startTime = clock(), currentTime;
 
-    permutation(toLowerCase(argv[1]), toLowerCase(argv[2]));
-    // viewTree(solutions, 0);
-    // loadFile(&dictionary);
-    // searchDict(solutions, dictionary);
+    permutation(argv[1], argv[2]);
+
+    currentTime = clock() - startTime;
+    printf("[TIME] Finished in %ldms\n", currentTime * 1000 / CLOCKS_PER_SEC);
+
     return 0;
   }
 }

@@ -69,15 +69,3 @@ char* replaceWildcards(char *mask, char *letters) {
   string[len] = '\0';
   return string;
 }
-
-char* toLowerCase(char *string) {
-  int len = strlen(string);
-  char *lower = (char *) malloc(sizeof(char) * (len + 1));
-
-  for (int i = 0; i < len; i++) {
-    lower[i] = tolower(string[i]);
-  }
-
-  lower[len] = '\0';
-  return lower;
-}

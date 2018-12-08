@@ -8,60 +8,50 @@ void permutation(char *letters, char *mask) {
   char **option = (char **) malloc(sizeof(char*) * (len + 2));
   for (int i = 0; i < len + 2; i++) option[i] = (char *) malloc(sizeof(char) * (len + 2));
 
-  int start, move, i, candidate, result;
+  int start, move, i, candidate, comparison;
+
+  FILE *dictStream = fopen("./dictionary/words.txt", "r");
+  char word[MAX_WORD_SIZE];
+  char substring[MAX_WORD_SIZE];
+
+  if (dictStream == NULL) {
+    exit(EXIT_FAILURE);
+  }
+
+  fscanf(dictStream, "%s\n", word);
 
   move = start = 0;
   nopts[start] = 1;
 
-  FILE *stream;
-  stream = fopen("./dictionary/words.txt", "r");
-
-  char* line = (char *) malloc(sizeof(char) * MAX_WORD_SIZE);
-  
-  if (stream == NULL){
-    printf("Dictionary not found");
-    exit(EXIT_FAILURE);
-  }
-
-  char *word;
-  word = (char *) malloc(sizeof(char) * MAX_WORD_SIZE);
-  fgets(line, MAX_WORD_SIZE, stream);
-  strcpy(word, line);
-  word[strlen(word) - 1] = '\0';
-  
+  int foo = 1;
 
   while (nopts[start] > 0) {
     if (nopts[move] > 0) {
       nopts[++move] = 0;
 
-      if (move - 1 == wildcards) {
-        char *solution = (char *) malloc(sizeof(char) * move);
-        for (i = 1; i < move; i++) solution[i - 1] = choices[option[i][nopts[i]]];
-        solution[move - 1] = '\0';
+      // Print a solution
+      char *generated = (char *) malloc(sizeof(char) * move);
+      for (i = 1; i < move; i++) generated[i - 1] = choices[option[i][nopts[i]]];
+      generated[move - 1] = '\0';
 
-        result = strcmp(word, solution);
-        // printf("%s %s %d\n", word, solution, result);
-        
-        if(result == 0) printf("%s\n", solution); // Valid word
-        
-        else if(result < 0){// Adjust dictionary
-           while (fgets(line, MAX_WORD_SIZE, stream) != NULL && result < 0){
-            free(word);
-            word = NULL;  
-            word = (char *) malloc(sizeof(char) * MAX_WORD_SIZE);
-            strcpy(word, line);
-            word[strlen(word) - 1] = '\0';
-            result = strcmp(word, solution);
-            // printf("%s %s %d\n", word, solution, result);
-            if(result == 0) printf("%s\n", solution);
-          }
-        }//else Adjust permutation
+      char *solution = replaceWildcards(mask, generated);
 
-        // Stops the system in doing permutation when the dictionary is exhausted
-        if(feof(stream)){
-          fclose(stream);
-          break;
-        };
+      // Dictionary Cross Check
+      if (strlen(solution)) {
+        comparison = strcmp(word, solution);
+
+        while (comparison < 0 && fscanf(dictStream, "%s\n", word) == 1) {
+          // Keep on adjusting dict until it catches up
+          comparison = strcmp(word, solution);
+        }
+
+        if (move - 1 == wildcards && !comparison) {
+          // Match found from dict
+          printf("%s\n", solution);
+
+          // Traverse the dictionary to avoid duplicates
+          fscanf(dictStream, "%s\n", word);
+        }
       }
 
       // Find Candidates
@@ -74,10 +64,26 @@ void permutation(char *letters, char *mask) {
           option[move][++nopts[move]] = candidate;
         }
       }
-    }  else {
+
+      // Prune
+      if (strlen(solution) && comparison > 0) {
+        // Dict is ahead, meaning no more words with same prefix
+        strcpy(substring, word);
+        substring[strlen(solution)] = '\0';
+
+        if (strcmp(substring, solution) > 0) {
+          nopts[--move]--;
+        }
+      }
+
+      free(solution);
+      free(generated);
+    } else {
       nopts[--move]--; // backtrack
     }
   }
+
+  fclose(dictStream);
 }
 
 
