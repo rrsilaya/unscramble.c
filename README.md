@@ -8,3 +8,4 @@ Run `make` to run the program.
 3. Go to the server directory.
 4. Install all the dependencies with `yarn install` or `npm install`.
 5. Run the server with `yarn start` or `npm start`.
+6. Lastly, run the client on the client directory with `yarn start` or `npm start`.
